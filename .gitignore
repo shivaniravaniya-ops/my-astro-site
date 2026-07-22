@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # wrangler state (local D1 DB)
 .wrangler/
+
+.dev.vars*
+!.dev.vars.example
+!.env.example
