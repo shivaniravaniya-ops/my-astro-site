@@ -1,0 +1,291 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// 产品占位数据（后续替换为D1数据库）
+const allProducts = [
+	{ id: 1, series: '300', name: 'Front Bumper', price: 649, category: 'Bumpers', badge: 'Best Seller' },
+	{ id: 2, series: '400', name: 'Side Skirt Set', price: 499, category: 'Side Skirts', badge: 'Popular' },
+	{ id: 3, series: '500', name: 'Rear Bumper', price: 729, category: 'Bumpers', badge: 'New' },
+	{ id: 4, series: '300', name: 'Rear Spoiler', price: 399, category: 'Spoilers', badge: '' },
+	{ id: 5, series: '400', name: 'Wide Body Kit', price: 2499, category: 'Body Kits', badge: 'Premium' },
+	{ id: 6, series: '500', name: 'Carbon Hood', price: 1199, category: 'Hoods', badge: 'Carbon' },
+	{ id: 7, series: '300', name: 'Wide Body Fenders', price: 899, category: 'Fenders', badge: '' },
+	{ id: 8, series: '400', name: 'Front Lip', price: 249, category: 'Bumpers', badge: '' },
+	{ id: 9, series: '500', name: 'Duck Tail Spoiler', price: 459, category: 'Spoilers', badge: 'Popular' },
+	{ id: 10, series: '300', name: 'Full Body Kit', price: 3299, category: 'Body Kits', badge: 'Bundle' },
+	{ id: 11, series: '400', name: 'Rear Diffuser', price: 549, category: 'Bumpers', badge: 'New' },
+	{ id: 12, series: '500', name: 'Trunk Spoiler GT', price: 699, category: 'Spoilers', badge: '' },
+];
+
+const categories = [
+	{ key: 'all', label: 'All Parts' },
+	{ key: 'Bumpers', label: 'Bumpers' },
+	{ key: 'Side Skirts', label: 'Side Skirts' },
+	{ key: 'Spoilers', label: 'Spoilers & Wings' },
+	{ key: 'Body Kits', label: 'Body Kits' },
+	{ key: 'Hoods', label: 'Hoods & Trunks' },
+	{ key: 'Fenders', label: 'Fenders' },
+];
+---
+
+<Layout>
+	<!-- ========== Page Header ========== -->
+	<section class="page-header">
+		<div class="container">
+			<h1>Shop Tank Parts</h1>
+			<p>Premium body kits & styling parts for GWM Tank 300, 400 & 500</p>
+		</div>
+	</section>
+
+	<!-- ========== Filter Bar ========== -->
+	<section class="filter-bar">
+		<div class="container">
+			<div class="filter-inner">
+				<!-- Series Filter -->
+				<div class="series-filter">
+					<a href="/shop" class="series-btn">All</a>
+					<a href="/shop?series=300" class="series-btn">Tank 300</a>
+					<a href="/shop?series=400" class="series-btn">Tank 400</a>
+					<a href="/shop?series=500" class="series-btn">Tank 500</a>
+				</div>
+				<!-- Category & Sort -->
+				<div class="filter-right">
+					<select class="filter-select" id="catFilter">
+						<option value="all">All Categories</option>
+						{categories.filter(c => c.key !== 'all').map(c => (
+							<option value={c.key}>{c.label}</option>
+						))}
+					</select>
+					<select class="filter-select" id="sortFilter">
+						<option>Featured</option>
+						<option>Price: Low to High</option>
+						<option>Price: High to Low</option>
+						<option>Newest</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ========== Product Grid ========== -->
+	<section class="products-section">
+		<div class="container">
+			<p class="results-count">{allProducts.length} products</p>
+			<div class="prod-grid" id="productGrid">
+				{allProducts.map(prod => (
+					<a href={`/product/${prod.id}`} class="prod-card glass-card" data-series={prod.series} data-category={prod.category}>
+						<div class="prod-img">
+							{prod.badge && <span class="prod-badge">{prod.badge}</span>}
+							<span class="prod-placeholder">Product Image</span>
+						</div>
+						<div class="prod-info">
+							<span class="prod-series">Tank {prod.series}</span>
+							<h4>{prod.name}</h4>
+							<p class="prod-cat">{prod.category}</p>
+							<div class="prod-footer">
+								<span class="prod-price">${prod.price.toLocaleString()}</span>
+								<span class="btn-view">View →</span>
+							</div>
+						</div>
+					</a>
+				))}
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.page-header {
+		padding: 60px 0 40px;
+		text-align: center;
+	}
+
+	.page-header h1 {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 42px;
+		font-weight: 800;
+		margin-bottom: 12px;
+	}
+
+	.page-header p {
+		font-size: 16px;
+		color: var(--color-text-muted);
+	}
+
+	/* Filter Bar */
+	.filter-bar {
+		position: sticky;
+		top: 76px;
+		z-index: 50;
+		padding: 16px 0;
+		background: rgba(6,12,18,0.8);
+		backdrop-filter: blur(20px);
+		border-bottom: 1px solid var(--glass-border);
+	}
+
+	.filter-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+		flex-wrap: wrap;
+	}
+
+	.series-filter {
+		display: flex;
+		gap: 8px;
+	}
+
+	.series-btn {
+		padding: 8px 20px;
+		border-radius: 8px;
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--color-text-muted);
+		background: transparent;
+		border: 1px solid var(--glass-border);
+		transition: all 0.2s;
+	}
+
+	.series-btn:hover, .series-btn.active {
+		color: var(--color-accent);
+		border-color: rgba(0,212,255,0.3);
+		background: rgba(0,212,255,0.06);
+	}
+
+	.filter-right {
+		display: flex;
+		gap: 12px;
+	}
+
+	.filter-select {
+		padding: 8px 16px;
+		background: rgba(255,255,255,0.04);
+		border: 1px solid var(--glass-border);
+		border-radius: 8px;
+		font-size: 13px;
+		color: var(--color-text);
+		font-family: inherit;
+		outline: none;
+		cursor: pointer;
+		transition: border-color 0.2s;
+	}
+
+	.filter-select:focus {
+		border-color: rgba(0,212,255,0.3);
+	}
+
+	/* Products */
+	.products-section {
+		padding: 40px 0 80px;
+	}
+
+	.results-count {
+		font-size: 13px;
+		color: var(--color-text-muted);
+		margin-bottom: 24px;
+	}
+
+	.prod-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 24px;
+	}
+
+	.prod-card {
+		text-decoration: none;
+		color: inherit;
+		overflow: hidden;
+		padding: 0;
+	}
+
+	.prod-img {
+		height: 200px;
+		background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.06) 100%);
+		border-bottom: 1px solid var(--glass-border);
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.prod-placeholder {
+		font-size: 12px;
+		color: rgba(255,255,255,0.2);
+		font-weight: 500;
+	}
+
+	.prod-badge {
+		position: absolute;
+		top: 12px;
+		left: 12px;
+		background: var(--color-accent);
+		color: #000;
+		padding: 4px 10px;
+		border-radius: 6px;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.prod-info {
+		padding: 20px;
+	}
+
+	.prod-series {
+		font-size: 11px;
+		font-weight: 600;
+		color: var(--color-accent);
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	.prod-info h4 {
+		font-size: 15px;
+		font-weight: 600;
+		margin: 6px 0 4px;
+	}
+
+	.prod-cat {
+		font-size: 12px;
+		color: var(--color-text-muted);
+		margin-bottom: 16px;
+	}
+
+	.prod-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.prod-price {
+		font-size: 18px;
+		font-weight: 700;
+		color: var(--color-accent);
+	}
+
+	.btn-view {
+		font-size: 13px;
+		color: var(--color-text-muted);
+		font-weight: 500;
+		transition: color 0.2s;
+	}
+
+	.prod-card:hover .btn-view {
+		color: var(--color-accent);
+	}
+
+	/* Responsive */
+	@media (max-width: 1200px) {
+		.prod-grid { grid-template-columns: repeat(3, 1fr); }
+	}
+
+	@media (max-width: 768px) {
+		.prod-grid { grid-template-columns: repeat(2, 1fr); }
+		.filter-inner { flex-direction: column; align-items: flex-start; }
+	}
+
+	@media (max-width: 480px) {
+		.prod-grid { grid-template-columns: 1fr; }
+	}
+</style>

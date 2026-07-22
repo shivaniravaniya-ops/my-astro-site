@@ -1,0 +1,718 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<!-- ========== 页面标题栏 ========== -->
+	<section class="page-header">
+		<div class="container">
+			<h1>产品中心</h1>
+			<p>覆盖全球主流车型 · 8000+ SKU · OEM/ODM定制支持</p>
+		</div>
+	</section>
+
+	<!-- ========== 搜索和筛选 ========== -->
+	<section class="filter-bar">
+		<div class="container">
+			<div class="filter-top">
+				<div class="search-box">
+					<input type="text" placeholder="搜索OE号码、产品名称或关键词..." />
+					<button type="button">🔍</button>
+				</div>
+				<div class="filter-actions">
+					<select>
+						<option value="">所有分类</option>
+						<option>发动机件</option>
+						<option>制动系统</option>
+						<option>车身外观件</option>
+						<option>底盘件</option>
+						<option>电气系统</option>
+						<option>热管理系统</option>
+					</select>
+					<select>
+						<option value="">所有品牌</option>
+						<option>丰田 TOYOTA</option>
+						<option>本田 HONDA</option>
+						<option>大众 VOLKSWAGEN</option>
+						<option>宝马 BMW</option>
+						<option>奔驰 BENZ</option>
+						<option>福特 FORD</option>
+						<option>别克 BUICK</option>
+					</select>
+				</div>
+			</div>
+			<div class="filter-tags">
+				<span>热门筛选：</span>
+				<button class="tag active">发动机件</button>
+				<button class="tag">制动系统</button>
+				<button class="tag">车身外观件</button>
+				<button class="tag">底盘件</button>
+				<button class="tag">电气系统</button>
+				<button class="tag">热管理系统</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- ========== 产品分类导航 ========== -->
+	<section class="cat-nav">
+		<div class="container">
+			<div class="cat-nav-grid">
+				<a href="#" class="cat-nav-item active">
+					<span class="cat-nav-icon">⚙️</span>
+					<span class="cat-nav-text">发动机件</span>
+					<span class="cat-nav-count">1,240 件</span>
+				</a>
+				<a href="#" class="cat-nav-item">
+					<span class="cat-nav-icon">🛑</span>
+					<span class="cat-nav-text">制动系统</span>
+					<span class="cat-nav-count">980 件</span>
+				</a>
+				<a href="#" class="cat-nav-item">
+					<span class="cat-nav-icon">🚗</span>
+					<span class="cat-nav-text">车身外观件</span>
+					<span class="cat-nav-count">1,560 件</span>
+				</a>
+				<a href="#" class="cat-nav-item">
+					<span class="cat-nav-icon">🔧</span>
+					<span class="cat-nav-text">底盘件</span>
+					<span class="cat-nav-count">1,120 件</span>
+				</a>
+				<a href="#" class="cat-nav-item">
+					<span class="cat-nav-icon">💡</span>
+					<span class="cat-nav-text">电气系统</span>
+					<span class="cat-nav-count">890 件</span>
+				</a>
+				<a href="#" class="cat-nav-item">
+					<span class="cat-nav-icon">❄️</span>
+					<span class="cat-nav-text">热管理系统</span>
+					<span class="cat-nav-count">760 件</span>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- ========== 产品网格 ========== -->
+	<section class="products-section">
+		<div class="container">
+			<div class="products-toolbar">
+				<span class="results-count">共找到 <strong>248</strong> 件相关产品</span>
+				<div class="sort">
+					<select>
+						<option>按销量排序</option>
+						<option>按价格升序</option>
+						<option>按价格降序</option>
+						<option>按最新上架</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="products-grid">
+				<!-- 产品卡片 1 -->
+				<div class="prod-card">
+					<div class="prod-img">
+						<span class="prod-badge hot">热卖</span>
+					</div>
+					<div class="prod-info">
+						<span class="prod-cat">制动系统</span>
+						<h4>前刹车片套装（陶瓷配方）</h4>
+						<p class="prod-oem">OEM: BP-8850 | 适用: 丰田凯美瑞 2018-2024</p>
+						<div class="prod-footer">
+							<span class="prod-price">$12.80 / 件</span>
+							<a href="/inquiry" class="btn-inquire">询价</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- 产品卡片 2 -->
+				<div class="prod-card">
+					<div class="prod-img">
+						<span class="prod-badge new">新品</span>
+					</div>
+					<div class="prod-info">
+						<span class="prod-cat">车身外观</span>
+						<h4>前保险杠总成 带支架</h4>
+						<p class="prod-oem">OEM: FB-2230 | 适用: 本田雅阁 2016-2021</p>
+						<div class="prod-footer">
+							<span class="prod-price">$68.50 / 件</span>
+							<a href="/inquiry" class="btn-inquire">询价</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- 产品卡片 3 -->
+				<div class="prod-card">
+					<div class="prod-img">
+						<span class="prod-badge">推荐</span>
+					</div>
+					<div class="prod-info">
+						<span class="prod-cat">发动机</span>
+						<h4>水泵总成（铝合金）</h4>
+						<p class="prod-oem">OEM: WP-4400 | 适用: 大众帕萨特 2015-2022</p>
+						<div class="prod-footer">
+							<span class="prod-price">$28.00 / 件</span>
+							<a href="/inquiry" class="btn-inquire">询价</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- 产品卡片 4 -->
+				<div class="prod-card">
+					<div class="prod-img"></div>
+					<div class="prod-info">
+						<span class="prod-cat">底盘</span>
+						<h4>前减震器总成（带轴承）</h4>
+						<p class="prod-oem">OEM: SH-6600 | 适用: 宝马3系 F30/F35</p>
+						<div class="prod-footer">
+							<span class="prod-price">$45.20 / 件</span>
+							<a href="/inquiry" class="btn-inquire">询价</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- 产品卡片 5 -->
+				<div class="prod-card">
+					<div class="prod-img">
+						<span class="prod-badge sale">促销</span>
+					</div>
+					<div class="prod-info">
+						<span class="prod-cat">电气</span>
+						<h4>起动机电机（高扭矩）</h4>
+						<p class="prod-oem">OEM: ST-1120 | 适用: 福特蒙迪欧 2014-2020</p>
+						<div class="prod-footer">
+							<span class="prod-price">$35.00 / 件</span>
+							<a href="/inquiry" class="btn-inquire">询价</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- 产品卡片 6 -->
+				<div class="prod-card">
+					<div class="prod-img"></div>
+					<div class="prod-info">
+						<span class="prod-cat">热管理</span>
+						<h4>空调冷凝器（铝合金）</h4>
+						<p class="prod-oem">OEM: AC-3300 | 适用: 别克君威 2017-2023</p>
+						<div class="prod-footer">
+							<span class="prod-price">$42.80 / 件</span>
+							<a href="/inquiry" class="btn-inquire">询价</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- 产品卡片 7 -->
+				<div class="prod-card">
+					<div class="prod-img"></div>
+					<div class="prod-info">
+						<span class="prod-cat">发动机</span>
+						<h4>发电机总成（90A大功率）</h4>
+						<p class="prod-oem">OEM: AL-9950 | 适用: 奔驰C级 W205</p>
+						<div class="prod-footer">
+							<span class="prod-price">$88.00 / 件</span>
+							<a href="/inquiry" class="btn-inquire">询价</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- 产品卡片 8 -->
+				<div class="prod-card">
+					<div class="prod-img">
+						<span class="prod-badge hot">热卖</span>
+					</div>
+					<div class="prod-info">
+						<span class="prod-cat">制动</span>
+						<h4>后刹车盘（通风盘）</h4>
+						<p class="prod-oem">OEM: RD-3380 | 适用: 大众途观L 2018-2024</p>
+						<div class="prod-footer">
+							<span class="prod-price">$22.50 / 件</span>
+							<a href="/inquiry" class="btn-inquire">询价</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- 产品卡片 9 -->
+				<div class="prod-card">
+					<div class="prod-img"></div>
+					<div class="prod-info">
+						<span class="prod-cat">底盘</span>
+						<h4>前控制臂总成（带球头）</h4>
+						<p class="prod-oem">OEM: CA-5500 | 适用: 奥迪A4L B9 2017-2024</p>
+						<div class="prod-footer">
+							<span class="prod-price">$56.00 / 件</span>
+							<a href="/inquiry" class="btn-inquire">询价</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 分页 -->
+			<div class="pagination">
+				<button class="page-btn" disabled>上一页</button>
+				<button class="page-btn active">1</button>
+				<button class="page-btn">2</button>
+				<button class="page-btn">3</button>
+				<button class="page-btn">4</button>
+				<button class="page-btn">5</button>
+				<span class="page-ellipsis">...</span>
+				<button class="page-btn">28</button>
+				<button class="page-btn">下一页</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- ========== 车型搜索 ========== -->
+	<section class="vin-search">
+		<div class="container">
+			<div class="vin-box">
+				<h2>按车型 / VIN 精准搜索配件</h2>
+				<p>输入17位VIN码或选择品牌车系，获取精确匹配配件列表</p>
+				<div class="vin-form">
+					<select>
+						<option value="">选择品牌</option>
+						<option>丰田 TOYOTA</option>
+						<option>本田 HONDA</option>
+						<option>大众 VOLKSWAGEN</option>
+						<option>宝马 BMW</option>
+						<option>奔驰 BENZ</option>
+						<option>福特 FORD</option>
+						<option>别克 BUICK</option>
+					</select>
+					<select>
+						<option value="">选择车系</option>
+					</select>
+					<select>
+						<option value="">选择年份</option>
+						<option>2024</option>
+						<option>2023</option>
+						<option>2022</option>
+						<option>2021</option>
+						<option>2020</option>
+					</select>
+					<input type="text" placeholder="或直接输入VIN码..." />
+					<button type="button" class="btn-vin">搜索配件</button>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	/* ========== 页面标题栏 ========== */
+	.page-header {
+		background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-bg-dark) 100%);
+		color: #fff;
+		padding: 48px 0;
+		text-align: center;
+	}
+
+	.page-header h1 {
+		font-size: 36px;
+		margin-bottom: 12px;
+	}
+
+	.page-header p {
+		color: #94a3b8;
+		font-size: 16px;
+	}
+
+	/* ========== 通用 ========== */
+	.container {
+		max-width: 1280px;
+		margin: 0 auto;
+		padding: 0 24px;
+	}
+
+	/* ========== 筛选栏 ========== */
+	.filter-bar {
+		background: #fff;
+		padding: 24px 0;
+		border-bottom: 1px solid var(--color-border);
+		position: sticky;
+		top: 70px;
+		z-index: 50;
+		box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+	}
+
+	.filter-top {
+		display: flex;
+		gap: 16px;
+		margin-bottom: 16px;
+	}
+
+	.search-box {
+		flex: 1;
+		display: flex;
+		background: var(--color-bg-light);
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
+	.search-box input {
+		flex: 1;
+		padding: 12px 16px;
+		border: none;
+		background: transparent;
+		font-size: 14px;
+		font-family: inherit;
+		outline: none;
+	}
+
+	.search-box button {
+		padding: 0 20px;
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		font-size: 16px;
+	}
+
+	.filter-actions {
+		display: flex;
+		gap: 12px;
+	}
+
+	.filter-actions select {
+		padding: 12px 16px;
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		font-size: 14px;
+		font-family: inherit;
+		background: #fff;
+		cursor: pointer;
+		min-width: 140px;
+	}
+
+	.filter-tags {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		flex-wrap: wrap;
+	}
+
+	.filter-tags span {
+		font-size: 14px;
+		color: var(--color-text-light);
+	}
+
+	.tag {
+		padding: 6px 14px;
+		border: 1px solid var(--color-border);
+		border-radius: 20px;
+		font-size: 13px;
+		background: #fff;
+		cursor: pointer;
+		transition: all 0.2s;
+		font-family: inherit;
+	}
+
+	.tag:hover, .tag.active {
+		background: var(--color-primary);
+		color: #fff;
+		border-color: var(--color-primary);
+	}
+
+	/* ========== 分类导航 ========== */
+	.cat-nav {
+		background: var(--color-bg-light);
+		padding: 32px 0;
+	}
+
+	.cat-nav-grid {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		gap: 16px;
+	}
+
+	.cat-nav-item {
+		background: #fff;
+		padding: 20px 12px;
+		border-radius: 10px;
+		text-align: center;
+		border: 2px solid transparent;
+		transition: all 0.2s;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.cat-nav-item:hover, .cat-nav-item.active {
+		border-color: var(--color-accent);
+		box-shadow: 0 4px 12px rgba(230,57,70,0.15);
+	}
+
+	.cat-nav-icon {
+		font-size: 32px;
+	}
+
+	.cat-nav-text {
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--color-text);
+	}
+
+	.cat-nav-count {
+		font-size: 12px;
+		color: var(--color-text-light);
+	}
+
+	/* ========== 产品列表 ========== */
+	.products-section {
+		padding: 40px 0 80px;
+		background: var(--color-bg-light);
+	}
+
+	.products-toolbar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 24px;
+	}
+
+	.results-count {
+		font-size: 14px;
+		color: var(--color-text-light);
+	}
+
+	.results-count strong {
+		color: var(--color-text);
+	}
+
+	.sort select {
+		padding: 8px 12px;
+		border: 1px solid var(--color-border);
+		border-radius: 6px;
+		font-size: 13px;
+		font-family: inherit;
+		background: #fff;
+		cursor: pointer;
+	}
+
+	.products-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+
+	.prod-card {
+		background: #fff;
+		border-radius: 12px;
+		overflow: hidden;
+		border: 1px solid var(--color-border);
+		transition: all 0.2s;
+	}
+
+	.prod-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+		border-color: var(--color-secondary);
+	}
+
+	.prod-img {
+		height: 180px;
+		background: linear-gradient(135deg, #e8ecf1 0%, #d1d5db 100%);
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.prod-img::after {
+		content: '🖼️';
+		font-size: 48px;
+		opacity: 0.3;
+	}
+
+	.prod-badge {
+		position: absolute;
+		top: 12px;
+		left: 12px;
+		padding: 4px 10px;
+		border-radius: 4px;
+		font-size: 12px;
+		font-weight: 600;
+		color: #fff;
+	}
+
+	.prod-badge.hot { background: var(--color-accent); }
+	.prod-badge.new { background: #10b981; }
+	.prod-badge.sale { background: #f59e0b; }
+
+	.prod-info {
+		padding: 20px;
+	}
+
+	.prod-cat {
+		font-size: 12px;
+		color: var(--color-secondary);
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.prod-info h4 {
+		font-size: 16px;
+		margin: 8px 0;
+		color: var(--color-text);
+	}
+
+	.prod-oem {
+		font-size: 13px;
+		color: var(--color-text-light);
+		margin-bottom: 16px;
+	}
+
+	.prod-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.prod-price {
+		font-size: 18px;
+		font-weight: 700;
+		color: var(--color-accent);
+	}
+
+	.btn-inquire {
+		background: var(--color-primary);
+		color: #fff;
+		padding: 8px 18px;
+		border-radius: 6px;
+		font-size: 13px;
+		font-weight: 600;
+		transition: background 0.2s;
+	}
+
+	.btn-inquire:hover {
+		background: var(--color-secondary);
+	}
+
+	/* ========== 分页 ========== */
+	.pagination {
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		margin-top: 48px;
+	}
+
+	.page-btn {
+		min-width: 40px;
+		height: 40px;
+		padding: 0 12px;
+		border: 1px solid var(--color-border);
+		border-radius: 6px;
+		background: #fff;
+		font-size: 14px;
+		cursor: pointer;
+		transition: all 0.2s;
+		font-family: inherit;
+	}
+
+	.page-btn:hover:not(:disabled) {
+		border-color: var(--color-primary);
+		color: var(--color-primary);
+	}
+
+	.page-btn.active {
+		background: var(--color-primary);
+		color: #fff;
+		border-color: var(--color-primary);
+	}
+
+	.page-btn:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	.page-ellipsis {
+		line-height: 40px;
+		color: var(--color-text-light);
+	}
+
+	/* ========== VIN搜索 ========== */
+	.vin-search {
+		padding: 80px 0;
+		background: #fff;
+	}
+
+	.vin-box {
+		background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-bg-dark) 100%);
+		border-radius: 16px;
+		padding: 48px;
+		text-align: center;
+		color: #fff;
+	}
+
+	.vin-box h2 {
+		font-size: 28px;
+		margin-bottom: 12px;
+	}
+
+	.vin-box p {
+		color: #94a3b8;
+		margin-bottom: 32px;
+	}
+
+	.vin-form {
+		display: flex;
+		gap: 12px;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.vin-form select,
+	.vin-form input {
+		padding: 12px 16px;
+		border-radius: 8px;
+		border: 1px solid rgba(255,255,255,0.2);
+		background: rgba(255,255,255,0.1);
+		color: #fff;
+		font-size: 14px;
+		font-family: inherit;
+		min-width: 160px;
+		outline: none;
+	}
+
+	.vin-form select option {
+		color: var(--color-text);
+		background: #fff;
+	}
+
+	.vin-form input {
+		flex: 1;
+		min-width: 200px;
+	}
+
+	.btn-vin {
+		background: var(--color-accent);
+		color: #fff;
+		padding: 12px 32px;
+		border: none;
+		border-radius: 8px;
+		font-weight: 600;
+		font-size: 15px;
+		cursor: pointer;
+		font-family: inherit;
+		transition: background 0.2s;
+	}
+
+	.btn-vin:hover {
+		background: #c1121f;
+	}
+
+	/* ========== 响应式 ========== */
+	@media (max-width: 1024px) {
+		.cat-nav-grid { grid-template-columns: repeat(3, 1fr); }
+		.products-grid { grid-template-columns: repeat(2, 1fr); }
+	}
+
+	@media (max-width: 768px) {
+		.filter-top { flex-direction: column; }
+		.filter-actions { flex-wrap: wrap; }
+		.cat-nav-grid { grid-template-columns: repeat(2, 1fr); }
+		.products-grid { grid-template-columns: 1fr; }
+		.vin-box { padding: 32px 20px; }
+		.vin-form { flex-direction: column; }
+		.vin-form select, .vin-form input { min-width: 100%; width: 100%; }
+	}
+</style>

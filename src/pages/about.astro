@@ -1,0 +1,223 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<section class="page-header">
+		<div class="container">
+			<h1>About TankGarage</h1>
+			<p>Driven by passion. Built for Tank owners.</p>
+		</div>
+	</section>
+
+	<section class="about-section">
+		<div class="container">
+			<div class="about-grid">
+				<div class="about-image glass-card">
+					<div class="about-img-placeholder">
+						<span>About Us Image</span>
+					</div>
+				</div>
+				<div class="about-text">
+					<h2>Who We Are</h2>
+					<p>TankGarage is an Australian owned and operated business, born out of a genuine love for the GWM Tank lineup. We specialise exclusively in premium body kits, bumpers, spoilers, and styling parts for the Tank 300, Tank 400, and Tank 500.</p>
+					<p>Whether you're building a weekend adventure rig or a show-stopping street machine, we're here to help you find the right parts at the right price.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="values-section">
+		<div class="container">
+			<h2 class="section-title centered">Our Values</h2>
+			<div class="values-grid">
+				<div class="value-card glass-card">
+					<h3>Quality First</h3>
+					<p>Every part in our catalogue is quality-checked before dispatch. We only stock parts we'd put on our own builds.</p>
+				</div>
+				<div class="value-card glass-card">
+					<h3>Tank Specialists</h3>
+					<p>We don't dilute our focus — we know Tank. Our team understands the platform inside out so you get the right fit, every time.</p>
+				</div>
+				<div class="value-card glass-card">
+					<h3>Fair Pricing</h3>
+					<p>Premium parts don't need a premium markup. We work directly with manufacturers to keep prices competitive without cutting corners.</p>
+				</div>
+				<div class="value-card glass-card">
+					<h3>Community Driven</h3>
+					<p>We're part of the growing Tank community in Australia. Follow our builds on Instagram and join the conversation.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="team-section">
+		<div class="container">
+			<h2 class="section-title centered">The Team</h2>
+			<p class="team-intro">A small team of car enthusiasts who eat, sleep, and breathe Tank.</p>
+			<div class="team-grid">
+				<div class="team-card glass-card">
+					<div class="team-img-placeholder">👤</div>
+					<h4>Name</h4>
+					<p>Founder & Director</p>
+				</div>
+				<div class="team-card glass-card">
+					<div class="team-img-placeholder">👤</div>
+					<h4>Name</h4>
+					<p>Sales & Support</p>
+				</div>
+				<div class="team-card glass-card">
+					<div class="team-img-placeholder">👤</div>
+					<h4>Name</h4>
+					<p>Operations & Logistics</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.page-header {
+		padding: 60px 0 40px;
+		text-align: center;
+	}
+
+	.page-header h1 {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 42px;
+		font-weight: 800;
+		margin-bottom: 12px;
+	}
+
+	.page-header p {
+		font-size: 16px;
+		color: var(--color-text-muted);
+	}
+
+	.about-section {
+		padding: 60px 0;
+	}
+
+	.about-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 48px;
+		align-items: center;
+	}
+
+	.about-image {
+		overflow: hidden;
+		padding: 0;
+	}
+
+	.about-img-placeholder {
+		height: 400px;
+		background: linear-gradient(135deg, rgba(0,212,255,0.06) 0%, rgba(123,97,255,0.06) 100%);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 16px;
+		color: rgba(255,255,255,0.2);
+		font-weight: 500;
+	}
+
+	.about-text h2 {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 28px;
+		font-weight: 700;
+		margin-bottom: 20px;
+	}
+
+	.about-text p {
+		font-size: 16px;
+		color: var(--color-text-muted);
+		line-height: 1.8;
+		margin-bottom: 16px;
+	}
+
+	.values-section {
+		padding: 60px 0;
+	}
+
+	.section-title {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 28px;
+		font-weight: 700;
+		margin-bottom: 32px;
+	}
+
+	.section-title.centered {
+		text-align: center;
+	}
+
+	.values-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 20px;
+	}
+
+	.value-card {
+		padding: 28px 20px;
+	}
+
+	.value-card h3 {
+		font-size: 16px;
+		font-weight: 700;
+		margin-bottom: 10px;
+	}
+
+	.value-card p {
+		font-size: 14px;
+		color: var(--color-text-muted);
+		line-height: 1.6;
+	}
+
+	.team-section {
+		padding: 60px 0 80px;
+	}
+
+	.team-intro {
+		text-align: center;
+		font-size: 16px;
+		color: var(--color-text-muted);
+		margin-bottom: 40px;
+	}
+
+	.team-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+
+	.team-card {
+		padding: 32px;
+		text-align: center;
+	}
+
+	.team-img-placeholder {
+		font-size: 64px;
+		margin-bottom: 16px;
+		opacity: 0.5;
+	}
+
+	.team-card h4 {
+		font-size: 16px;
+		font-weight: 600;
+		margin-bottom: 4px;
+	}
+
+	.team-card p {
+		font-size: 13px;
+		color: var(--color-text-muted);
+	}
+
+	@media (max-width: 1024px) {
+		.about-grid { grid-template-columns: 1fr; }
+		.values-grid { grid-template-columns: repeat(2, 1fr); }
+	}
+
+	@media (max-width: 768px) {
+		.values-grid { grid-template-columns: 1fr; }
+		.team-grid { grid-template-columns: 1fr; }
+	}
+</style>

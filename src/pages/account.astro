@@ -1,0 +1,438 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<section class="page-header">
+		<div class="container">
+			<h1>My Account</h1>
+			<p>Sign in to manage your orders and saved parts</p>
+		</div>
+	</section>
+
+	<section class="account-section">
+		<div class="container">
+			<div class="account-tabs">
+				<button class="tab-btn active" id="tabSignIn">Sign In</button>
+				<button class="tab-btn" id="tabRegister">Create Account</button>
+			</div>
+
+			<!-- Sign In -->
+			<div class="account-panel" id="panelSignIn">
+				<div class="form-card">
+					<h2>Welcome Back</h2>
+					<p class="form-subtitle">Sign in to your TankGarage account</p>
+					<form class="auth-form" id="signInForm">
+						<div class="form-group">
+							<label for="signin-email">Email Address</label>
+							<input type="email" id="signin-email" placeholder="your@email.com" required />
+						</div>
+						<div class="form-group">
+							<label for="signin-password">Password</label>
+							<input type="password" id="signin-password" placeholder="Your password" required />
+						</div>
+						<div class="form-row-link">
+							<a href="#" class="forgot-link">Forgot password?</a>
+						</div>
+						<button type="submit" class="btn-auth">Sign In</button>
+					</form>
+					<div class="auth-divider"><span>or continue with</span></div>
+					<div class="social-login">
+						<button class="btn-social">Facebook</button>
+						<button class="btn-social">Google</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Register -->
+			<div class="account-panel hidden" id="panelRegister">
+				<div class="form-card">
+					<h2>Create Account</h2>
+					<p class="form-subtitle">Join TankGarage for exclusive deals and order tracking</p>
+					<form class="auth-form" id="registerForm">
+						<div class="form-row">
+							<div class="form-group">
+								<label for="reg-firstname">First Name</label>
+								<input type="text" id="reg-firstname" placeholder="First name" required />
+							</div>
+							<div class="form-group">
+								<label for="reg-lastname">Last Name</label>
+								<input type="text" id="reg-lastname" placeholder="Last name" required />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="reg-email">Email Address</label>
+							<input type="email" id="reg-email" placeholder="your@email.com" required />
+						</div>
+						<div class="form-group">
+							<label for="reg-password">Password</label>
+							<input type="password" id="reg-password" placeholder="Min. 8 characters" minlength="8" required />
+						</div>
+						<div class="form-group">
+							<label for="reg-confirm">Confirm Password</label>
+							<input type="password" id="reg-confirm" placeholder="Repeat password" minlength="8" required />
+						</div>
+						<div class="form-check">
+							<input type="checkbox" id="reg-newsletter" />
+							<label for="reg-newsletter">Subscribe to our newsletter for deals and Tank build inspiration</label>
+						</div>
+						<div class="form-check">
+							<input type="checkbox" id="reg-terms" required />
+							<label for="reg-terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+						</div>
+						<button type="submit" class="btn-auth">Create Account</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 成功提示弹窗 -->
+	<div class="success-modal" id="successModal" style="display:none;">
+		<div class="success-content">
+			<div class="success-icon">✅</div>
+			<h2 id="modalTitle">Success!</h2>
+			<p id="modalMessage">Your action was successful.</p>
+			<button class="btn-ok" onclick="closeModal()">OK</button>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	function showModal(title, message) {
+		document.getElementById('modalTitle').textContent = title;
+		document.getElementById('modalMessage').textContent = message;
+		document.getElementById('successModal').style.display = 'flex';
+	}
+
+	function closeModal() {
+		document.getElementById('successModal').style.display = 'none';
+	}
+
+	// Tab 切换
+	document.getElementById('tabSignIn')?.addEventListener('click', () => {
+		document.getElementById('tabSignIn')?.classList.add('active');
+		document.getElementById('tabRegister')?.classList.remove('active');
+		document.getElementById('panelSignIn')?.classList.remove('hidden');
+		document.getElementById('panelRegister')?.classList.add('hidden');
+	});
+
+	document.getElementById('tabRegister')?.addEventListener('click', () => {
+		document.getElementById('tabRegister')?.classList.add('active');
+		document.getElementById('tabSignIn')?.classList.remove('active');
+		document.getElementById('panelRegister')?.classList.remove('hidden');
+		document.getElementById('panelSignIn')?.classList.add('hidden');
+	});
+
+	// 登录提交
+	document.getElementById('signInForm')?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		const email = document.getElementById('signin-email')?.value?.trim();
+		const password = document.getElementById('signin-password')?.value;
+		if (!email || !password) {
+			showModal('Missing Fields', 'Please enter both email and password.');
+			return;
+		}
+		showModal('Login Successful', 'Welcome back! You are now signed in. (Demo mode)');
+	});
+
+	// 注册提交
+	document.getElementById('registerForm')?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		const firstname = document.getElementById('reg-firstname')?.value?.trim();
+		const lastname = document.getElementById('reg-lastname')?.value?.trim();
+		const email = document.getElementById('reg-email')?.value?.trim();
+		const password = document.getElementById('reg-password')?.value;
+		const confirm = document.getElementById('reg-confirm')?.value;
+		const terms = document.getElementById('reg-terms')?.checked;
+
+		if (!firstname || !lastname || !email || !password) {
+			showModal('Missing Fields', 'Please fill in all required fields.');
+			return;
+		}
+		if (password !== confirm) {
+			showModal('Password Mismatch', 'Passwords do not match. Please try again.');
+			return;
+		}
+		if (password.length < 8) {
+			showModal('Password Too Short', 'Password must be at least 8 characters.');
+			return;
+		}
+		if (!terms) {
+			showModal('Terms Required', 'Please agree to the Terms of Service and Privacy Policy.');
+			return;
+		}
+		showModal('Account Created!', `Welcome to TankGarage, ${firstname}! Your account has been created. (Demo mode)`);
+	});
+</script>
+
+<style>
+	.page-header {
+		padding: 60px 0 40px;
+		text-align: center;
+	}
+	.page-header h1 {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 42px;
+		font-weight: 800;
+		margin-bottom: 12px;
+	}
+	.page-header p { font-size: 16px; color: var(--color-text-muted); }
+
+	.account-section { padding: 40px 0 80px; }
+
+	/* Tabs */
+	.account-tabs {
+		display: flex;
+		gap: 0;
+		border-bottom: 2px solid var(--color-border);
+		margin-bottom: 40px;
+		max-width: 500px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.tab-btn {
+		flex: 1;
+		padding: 14px;
+		background: none;
+		border: none;
+		font-size: 15px;
+		font-weight: 600;
+		color: var(--color-text-muted);
+		cursor: pointer;
+		font-family: inherit;
+		border-bottom: 3px solid transparent;
+		margin-bottom: -2px;
+		transition: all 0.2s;
+	}
+
+	.tab-btn:hover { color: var(--color-primary); }
+
+	.tab-btn.active {
+		color: var(--color-primary);
+		border-bottom-color: var(--color-primary);
+	}
+
+	.account-panel {
+		max-width: 500px;
+		margin: 0 auto;
+	}
+
+	.account-panel.hidden { display: none; }
+
+	.form-card {
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		padding: 40px;
+	}
+
+	.form-card h2 {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 22px;
+		font-weight: 700;
+		margin-bottom: 6px;
+	}
+
+	.form-subtitle {
+		font-size: 14px;
+		color: var(--color-text-muted);
+		margin-bottom: 28px;
+	}
+
+	.auth-form {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.form-group {
+		display: flex;
+		flex-direction: column;
+		gap: 7px;
+	}
+
+	.form-group label {
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--color-text);
+	}
+
+	.form-group input {
+		padding: 13px 16px;
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-sm);
+		font-size: 14px;
+		color: var(--color-text);
+		font-family: inherit;
+		outline: none;
+		transition: border-color 0.2s;
+	}
+
+	.form-group input:focus { border-color: var(--color-primary); }
+	.form-group input::placeholder { color: var(--color-text-muted); }
+
+	.form-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 16px;
+	}
+
+	.form-row-link {
+		text-align: right;
+	}
+
+	.forgot-link {
+		font-size: 13px;
+		color: var(--color-primary);
+	}
+
+	.forgot-link:hover { text-decoration: underline; }
+
+	.btn-auth {
+		padding: 14px;
+		background: var(--color-primary);
+		color: #fff;
+		border: none;
+		border-radius: var(--radius-sm);
+		font-size: 15px;
+		font-weight: 700;
+		cursor: pointer;
+		font-family: inherit;
+		transition: all 0.2s;
+		margin-top: 8px;
+	}
+
+	.btn-auth:hover {
+		background: var(--color-primary-dark);
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(255,69,0,0.3);
+	}
+
+	.auth-divider {
+		text-align: center;
+		position: relative;
+		margin: 24px 0;
+	}
+
+	.auth-divider::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: var(--color-border);
+	}
+
+	.auth-divider span {
+		position: relative;
+		background: var(--color-bg);
+		padding: 0 16px;
+		font-size: 12px;
+		color: var(--color-text-muted);
+	}
+
+	.social-login {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 12px;
+	}
+
+	.btn-social {
+		padding: 12px;
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-sm);
+		font-size: 13px;
+		font-weight: 500;
+		color: var(--color-text);
+		cursor: pointer;
+		font-family: inherit;
+		transition: all 0.2s;
+	}
+
+	.btn-social:hover {
+		border-color: var(--color-primary);
+		color: var(--color-primary);
+	}
+
+	/* Register form extras */
+	.form-check {
+		display: flex;
+		align-items: flex-start;
+		gap: 10px;
+		font-size: 13px;
+		color: var(--color-text-muted);
+		line-height: 1.5;
+	}
+
+	.form-check input[type="checkbox"] {
+		margin-top: 3px;
+		accent-color: var(--color-primary);
+	}
+
+	.form-check a {
+		color: var(--color-primary);
+	}
+
+	.form-check a:hover { text-decoration: underline; }
+
+	/* 成功弹窗 */
+	.success-modal {
+		position: fixed;
+		inset: 0;
+		background: rgba(26,26,46,0.7);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 300;
+	}
+
+	.success-content {
+		background: #fff;
+		border-radius: var(--radius);
+		padding: 48px;
+		text-align: center;
+		max-width: 420px;
+		width: 90%;
+	}
+
+	.success-icon { font-size: 56px; margin-bottom: 16px; }
+
+	.success-content h2 {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 22px;
+		font-weight: 700;
+		margin-bottom: 10px;
+	}
+
+	.success-content p {
+		font-size: 14px;
+		color: var(--color-text-muted);
+		line-height: 1.7;
+		margin-bottom: 24px;
+	}
+
+	.btn-ok {
+		padding: 12px 40px;
+		background: var(--color-primary);
+		color: #fff;
+		border: none;
+		border-radius: var(--radius-sm);
+		font-size: 14px;
+		font-weight: 700;
+		cursor: pointer;
+		font-family: inherit;
+		transition: background 0.2s;
+	}
+
+	.btn-ok:hover { background: var(--color-primary-dark); }
+
+	@media (max-width: 768px) {
+		.form-row { grid-template-columns: 1fr; }
+		.form-card { padding: 28px 20px; }
+	}
+</style>

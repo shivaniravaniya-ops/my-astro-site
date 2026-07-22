@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const posts = [
+	{
+		id: 1,
+		title: 'Tank 300 Wide Body Kit — Full Install & Review',
+		excerpt: 'We took our Tank 300 to the next level with a complete wide body conversion. Here is our honest review of the process, fitment, and final result.',
+		date: 'July 15, 2026',
+		category: 'Builds',
+		series: '300',
+	},
+	{
+		id: 2,
+		title: 'Tank 500 vs Tank 400 — Which One Gets Better Body Kit Options?',
+		excerpt: 'A detailed comparison of body kit availability, pricing, and fitment across the Tank 400 and Tank 500 platforms. Which one wins?',
+		date: 'July 8, 2026',
+		category: 'Guides',
+		series: '400',
+	},
+	{
+		id: 3,
+		title: 'How to Prepare Your Tank for a Body Kit Install',
+		excerpt: 'Before you bolt on that new bumper or spoiler, here is everything you need to know about surface prep, painting, and fitment checks.',
+		date: 'June 28, 2026',
+		category: 'Guides',
+		series: 'All',
+	},
+	{
+		id: 4,
+		title: 'Tank 300 Rally Build — Part 1: The Plan',
+		excerpt: 'Follow our journey as we turn a stock Tank 300 into a rally-inspired adventure machine. Part 1 covers the vision, the parts list, and the goals.',
+		date: 'June 20, 2026',
+		category: 'Builds',
+		series: '300',
+	},
+	{
+		id: 5,
+		title: 'Carbon Fiber vs FRP — Which Material is Right for You?',
+		excerpt: 'We break down the pros and cons of carbon fiber and fiberglass reinforced plastic (FRP) body kits so you can make the right call for your build.',
+		date: 'June 12, 2026',
+		category: 'Guides',
+		series: 'All',
+	},
+	{
+		id: 6,
+		title: 'New Arrivals: Tank 500 Spoiler Range Now In Stock',
+		excerpt: 'Exciting news — we just landed a fresh shipment of Tank 500 specific spoilers, rear bumpers and side skirts. Check out what is new.',
+		date: 'June 5, 2026',
+		category: 'News',
+		series: '500',
+	},
+];
+---
+
+<Layout>
+	<section class="page-header">
+		<div class="container">
+			<h1>TankGarage Blog</h1>
+			<p>Builds, guides, and news from the Tank community</p>
+		</div>
+	</section>
+
+	<section class="blog-section">
+		<div class="container">
+			<div class="blog-grid">
+				{posts.map(post => (
+					<a href={`/blog/${post.id}`} class="blog-card glass-card">
+						<div class="blog-img">
+							<span class="blog-img-placeholder">Blog Image</span>
+							<span class="blog-cat-tag">{post.category}</span>
+						</div>
+						<div class="blog-info">
+							<div class="blog-meta">
+								<span class="blog-series">Tank {post.series}</span>
+								<span class="blog-date">{post.date}</span>
+							</div>
+							<h3>{post.title}</h3>
+							<p>{post.excerpt}</p>
+							<span class="blog-read-more">Read More →</span>
+						</div>
+					</a>
+				))}
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.page-header {
+		padding: 60px 0 40px;
+		text-align: center;
+	}
+
+	.page-header h1 {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 42px;
+		font-weight: 800;
+		margin-bottom: 12px;
+	}
+
+	.page-header p {
+		font-size: 16px;
+		color: var(--color-text-muted);
+	}
+
+	.blog-section {
+		padding: 40px 0 80px;
+	}
+
+	.blog-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+
+	.blog-card {
+		text-decoration: none;
+		color: inherit;
+		overflow: hidden;
+		padding: 0;
+	}
+
+	.blog-img {
+		height: 200px;
+		background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.06) 100%);
+		border-bottom: 1px solid var(--glass-border);
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.blog-img-placeholder {
+		font-size: 12px;
+		color: rgba(255,255,255,0.2);
+		font-weight: 500;
+	}
+
+	.blog-cat-tag {
+		position: absolute;
+		top: 12px;
+		left: 12px;
+		background: var(--color-accent);
+		color: #000;
+		padding: 4px 10px;
+		border-radius: 6px;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.blog-info {
+		padding: 24px;
+	}
+
+	.blog-meta {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 12px;
+	}
+
+	.blog-series {
+		font-size: 11px;
+		font-weight: 600;
+		color: var(--color-accent);
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	.blog-date {
+		font-size: 12px;
+		color: var(--color-text-muted);
+	}
+
+	.blog-info h3 {
+		font-size: 16px;
+		font-weight: 700;
+		line-height: 1.4;
+		margin-bottom: 10px;
+	}
+
+	.blog-info p {
+		font-size: 13px;
+		color: var(--color-text-muted);
+		line-height: 1.6;
+		margin-bottom: 16px;
+	}
+
+	.blog-read-more {
+		font-size: 13px;
+		color: var(--color-accent);
+		font-weight: 600;
+	}
+
+	@media (max-width: 1024px) {
+		.blog-grid { grid-template-columns: repeat(2, 1fr); }
+	}
+
+	@media (max-width: 768px) {
+		.blog-grid { grid-template-columns: 1fr; }
+	}
+</style>

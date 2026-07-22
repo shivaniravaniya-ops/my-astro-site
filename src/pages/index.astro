@@ -1,11 +1,695 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// 精选产品占位数据（图片后续替换）
+const featuredProducts = [
+	{
+		id: 1,
+		series: '300',
+		name: 'Front Bumper',
+		price: 649,
+		badge: 'Best Seller',
+		category: 'Bumpers',
+	},
+	{
+		id: 2,
+		series: '400',
+		name: 'Side Skirt Set',
+		price: 499,
+		badge: 'Popular',
+		category: 'Side Skirts',
+	},
+	{
+		id: 3,
+		series: '500',
+		name: 'Rear Bumper',
+		price: 729,
+		badge: 'New',
+		category: 'Bumpers',
+	},
+	{
+		id: 4,
+		series: '300',
+		name: 'Rear Spoiler',
+		price: 399,
+		badge: '',
+		category: 'Spoilers',
+	},
+	{
+		id: 5,
+		series: '400',
+		name: 'Wide Body Kit',
+		price: 2499,
+		badge: 'Premium',
+		category: 'Body Kits',
+	},
+	{
+		id: 6,
+		series: '500',
+		name: 'Carbon Hood',
+		price: 1199,
+		badge: 'Carbon',
+		category: 'Hoods',
+	},
+];
+
+const categories = [
+	{ series: '300', name: 'Tank 300', desc: 'Body Kits & Parts', count: 48 },
+	{ series: '400', name: 'Tank 400', desc: 'Body Kits & Parts', count: 52 },
+	{ series: '500', name: 'Tank 500', desc: 'Body Kits & Parts', count: 44 },
+];
 ---
 
 <Layout>
-	<Welcome />
+	<!-- ========== Hero Banner ========== -->
+	<section class="hero">
+		<div class="hero-bg"></div>
+		<div class="hero-glow"></div>
+		<div class="hero-content container">
+			<div class="hero-text">
+				<span class="hero-tag">Australian Owned & Operated</span>
+				<h1>Premium Tank<br/><span class="highlight">Body Kits</span> & Parts</h1>
+				<p>Transform your GWM Tank with our precision-engineered body kits, bumpers, spoilers and styling parts. Designed for performance. Built to last.</p>
+				<div class="hero-actions">
+					<a href="/shop" class="btn-primary">Shop All Parts</a>
+					<a href="/contact" class="btn-outline">Get in Touch</a>
+				</div>
+			</div>
+			<div class="hero-image">
+				<div class="hero-img-placeholder">
+					<span>BANNER IMAGE</span>
+					<span class="hero-img-hint">Your image here</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ========== Tank Series Selector ========== -->
+	<section class="series-section">
+		<div class="container">
+			<div class="series-grid">
+				{categories.map(cat => (
+					<a href={`/shop?series=${cat.series}`} class="series-card glass-card">
+						<div class="series-img-placeholder">
+							<span>TANK {cat.series}</span>
+						</div>
+						<div class="series-info">
+							<h3>Tank {cat.series}</h3>
+							<p>{cat.desc}</p>
+							<span class="series-count">{cat.count} Products</span>
+						</div>
+					</a>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- ========== Product Categories ========== -->
+	<section class="cat-section">
+		<div class="container">
+			<div class="section-header">
+				<h2>Shop by Category</h2>
+				<a href="/shop" class="see-all">View All →</a>
+			</div>
+			<div class="cat-grid">
+				<a href="/shop?cat=bumpers" class="cat-card glass-card">
+					<div class="cat-icon-placeholder">🏎️</div>
+					<h4>Bumpers</h4>
+					<span>Front & Rear</span>
+				</a>
+				<a href="/shop?cat=skirts" class="cat-card glass-card">
+					<div class="cat-icon-placeholder">📏</div>
+					<h4>Side Skirts</h4>
+					<span>Full Sets</span>
+				</a>
+				<a href="/shop?cat=spoilers" class="cat-card glass-card">
+					<div class="cat-icon-placeholder">🦅</div>
+					<h4>Spoilers & Wings</h4>
+					<span>Style & Performance</span>
+				</a>
+				<a href="/shop?cat=bodykits" class="cat-card glass-card">
+					<div class="cat-icon-placeholder">🧩</div>
+					<h4>Body Kits</h4>
+					<span>Complete Kits</span>
+				</a>
+				<a href="/shop?cat=hoods" class="cat-card glass-card">
+					<div class="cat-icon-placeholder">🔧</div>
+					<h4>Hoods & Trunks</h4>
+					<span>Carbon & FRP</span>
+				</a>
+				<a href="/shop?cat=fenders" class="cat-card glass-card">
+					<div class="cat-icon-placeholder">⭕</div>
+					<h4>Fenders</h4>
+					<span>Wide Body</span>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- ========== Featured Products ========== -->
+	<section class="featured-section">
+		<div class="container">
+			<div class="section-header">
+				<h2>Featured Products</h2>
+				<a href="/shop" class="see-all">Shop All →</a>
+			</div>
+			<div class="prod-grid">
+				{featuredProducts.map(prod => (
+					<a href={`/product/${prod.id}`} class="prod-card glass-card">
+						<div class="prod-img">
+							<span class="prod-badge">{prod.badge}</span>
+							<span class="prod-placeholder">Product Image</span>
+						</div>
+						<div class="prod-info">
+							<span class="prod-series">Tank {prod.series}</span>
+							<h4>{prod.name}</h4>
+							<p class="prod-cat">{prod.category}</p>
+							<div class="prod-footer">
+								<span class="prod-price">${prod.price.toLocaleString()}</span>
+								<span class="btn-view">View →</span>
+							</div>
+						</div>
+					</a>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- ========== Why Choose Us ========== -->
+	<section class="why-section">
+		<div class="container">
+			<h2 class="section-title">Why Choose TankGarage?</h2>
+			<div class="why-grid">
+				<div class="why-card glass-card">
+					<div class="why-icon">🇦🇺</div>
+					<h3>Australian Owned</h3>
+					<p>Proudly Australian owned and operated. We understand local roads and conditions.</p>
+				</div>
+				<div class="why-card glass-card">
+					<div class="why-icon">🚚</div>
+					<h3>Australia-Wide Shipping</h3>
+					<p>Fast, reliable shipping across Australia. International orders welcome.</p>
+				</div>
+				<div class="why-card glass-card">
+					<div class="why-icon">✅</div>
+					<h3>Quality Guaranteed</h3>
+					<p>Every part is quality-checked before dispatch. Premium materials, precision fit.</p>
+				</div>
+				<div class="why-card glass-card">
+					<div class="why-icon">💬</div>
+					<h3>Expert Support</h3>
+					<p>Got questions? Our team of Tank enthusiasts is here to help you choose the right parts.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ========== Newsletter ========== -->
+	<section class="newsletter-section">
+		<div class="container">
+			<div class="newsletter-box glass">
+				<div class="newsletter-text">
+					<h2>Stay in the Loop</h2>
+					<p>Get notified about new products, exclusive deals and Tank build inspiration.</p>
+				</div>
+				<form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('input').value=''; alert('Thanks for subscribing!');">
+					<input type="email" placeholder="Enter your email" required />
+					<button type="submit">Subscribe</button>
+				</form>
+			</div>
+		</div>
+	</section>
 </Layout>
+
+<style>
+	/* ========== Hero ========== */
+	.hero {
+		position: relative;
+		padding: 80px 0 60px;
+		overflow: hidden;
+		min-height: 600px;
+	}
+
+	.hero-bg {
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(ellipse 100% 80% at 60% 50%, rgba(0,212,255,0.06) 0%, transparent 70%);
+	}
+
+	.hero-glow {
+		position: absolute;
+		top: -200px;
+		right: -200px;
+		width: 600px;
+		height: 600px;
+		background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 60%);
+		pointer-events: none;
+	}
+
+	.hero-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 60px;
+		align-items: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.hero-tag {
+		display: inline-block;
+		padding: 6px 14px;
+		background: rgba(0,212,255,0.1);
+		border: 1px solid rgba(0,212,255,0.2);
+		border-radius: 20px;
+		font-size: 12px;
+		font-weight: 600;
+		color: var(--color-accent);
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin-bottom: 20px;
+	}
+
+	.hero-text h1 {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 56px;
+		font-weight: 800;
+		line-height: 1.1;
+		margin-bottom: 20px;
+		letter-spacing: -1px;
+	}
+
+	.highlight {
+		color: var(--color-accent);
+	}
+
+	.hero-text p {
+		font-size: 17px;
+		color: var(--color-text-muted);
+		line-height: 1.7;
+		margin-bottom: 32px;
+		max-width: 480px;
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: 16px;
+	}
+
+	.btn-primary {
+		background: var(--color-accent);
+		color: #000;
+		padding: 14px 32px;
+		border-radius: var(--radius-sm);
+		font-weight: 700;
+		font-size: 14px;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		transition: all 0.2s;
+	}
+
+	.btn-primary:hover {
+		background: #00b8e0;
+		transform: translateY(-2px);
+		box-shadow: 0 8px 24px rgba(0,212,255,0.25);
+	}
+
+	.btn-outline {
+		background: transparent;
+		color: var(--color-text);
+		padding: 14px 32px;
+		border-radius: var(--radius-sm);
+		font-weight: 600;
+		font-size: 14px;
+		border: 1px solid var(--glass-border);
+		transition: all 0.2s;
+	}
+
+	.btn-outline:hover {
+		border-color: var(--color-accent);
+		color: var(--color-accent);
+	}
+
+	.hero-img-placeholder {
+		width: 100%;
+		aspect-ratio: 4/3;
+		background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.06) 100%);
+		border: 1px dashed rgba(255,255,255,0.15);
+		border-radius: var(--radius);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		color: var(--color-text-muted);
+		font-size: 20px;
+		font-weight: 600;
+	}
+
+	.hero-img-hint {
+		font-size: 12px;
+		color: rgba(255,255,255,0.3);
+		font-weight: 400;
+	}
+
+	/* ========== Tank Series ========== */
+	.series-section {
+		padding: 60px 0;
+	}
+
+	.series-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+
+	.series-card {
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		overflow: hidden;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.series-img-placeholder {
+		height: 160px;
+		background: linear-gradient(135deg, rgba(0,212,255,0.08) 0%, rgba(123,97,255,0.08) 100%);
+		border-bottom: 1px solid var(--glass-border);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 14px;
+		font-weight: 700;
+		color: rgba(255,255,255,0.2);
+		letter-spacing: 3px;
+	}
+
+	.series-info {
+		padding: 24px;
+	}
+
+	.series-info h3 {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 22px;
+		font-weight: 700;
+		margin-bottom: 4px;
+	}
+
+	.series-info p {
+		font-size: 13px;
+		color: var(--color-text-muted);
+		margin-bottom: 12px;
+	}
+
+	.series-count {
+		font-size: 12px;
+		color: var(--color-accent);
+		font-weight: 600;
+	}
+
+	/* ========== Categories ========== */
+	.cat-section {
+		padding: 60px 0;
+	}
+
+	.section-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 32px;
+	}
+
+	.section-header h2,
+	.section-title {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 28px;
+		font-weight: 700;
+	}
+
+	.section-title {
+		text-align: center;
+		margin-bottom: 40px;
+	}
+
+	.see-all {
+		font-size: 14px;
+		color: var(--color-accent);
+		font-weight: 500;
+		transition: opacity 0.2s;
+	}
+
+	.see-all:hover { opacity: 0.7; }
+
+	.cat-grid {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		gap: 16px;
+	}
+
+	.cat-card {
+		padding: 24px 16px;
+		text-align: center;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.cat-icon-placeholder {
+		font-size: 36px;
+		margin-bottom: 12px;
+		filter: grayscale(0.3);
+	}
+
+	.cat-card h4 {
+		font-size: 14px;
+		font-weight: 600;
+		margin-bottom: 4px;
+	}
+
+	.cat-card span {
+		font-size: 12px;
+		color: var(--color-text-muted);
+	}
+
+	/* ========== Featured Products ========== */
+	.featured-section {
+		padding: 60px 0;
+	}
+
+	.prod-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+
+	.prod-card {
+		text-decoration: none;
+		color: inherit;
+		overflow: hidden;
+		padding: 0;
+	}
+
+	.prod-img {
+		height: 220px;
+		background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.06) 100%);
+		border-bottom: 1px solid var(--glass-border);
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.prod-placeholder {
+		font-size: 13px;
+		color: rgba(255,255,255,0.2);
+		font-weight: 500;
+	}
+
+	.prod-badge {
+		position: absolute;
+		top: 12px;
+		left: 12px;
+		background: var(--color-accent);
+		color: #000;
+		padding: 4px 10px;
+		border-radius: 6px;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.prod-info {
+		padding: 20px;
+	}
+
+	.prod-series {
+		font-size: 11px;
+		font-weight: 600;
+		color: var(--color-accent);
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	.prod-info h4 {
+		font-size: 16px;
+		font-weight: 600;
+		margin: 6px 0 4px;
+	}
+
+	.prod-cat {
+		font-size: 12px;
+		color: var(--color-text-muted);
+		margin-bottom: 16px;
+	}
+
+	.prod-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.prod-price {
+		font-size: 18px;
+		font-weight: 700;
+		color: var(--color-accent);
+	}
+
+	.btn-view {
+		font-size: 13px;
+		color: var(--color-text-muted);
+		font-weight: 500;
+		transition: color 0.2s;
+	}
+
+	.prod-card:hover .btn-view {
+		color: var(--color-accent);
+	}
+
+	/* ========== Why Choose Us ========== */
+	.why-section {
+		padding: 60px 0;
+	}
+
+	.why-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 20px;
+	}
+
+	.why-card {
+		padding: 28px 20px;
+		text-align: center;
+	}
+
+	.why-icon {
+		font-size: 40px;
+		margin-bottom: 16px;
+	}
+
+	.why-card h3 {
+		font-size: 15px;
+		font-weight: 600;
+		margin-bottom: 8px;
+	}
+
+	.why-card p {
+		font-size: 13px;
+		color: var(--color-text-muted);
+		line-height: 1.6;
+	}
+
+	/* ========== Newsletter ========== */
+	.newsletter-section {
+		padding: 60px 0;
+	}
+
+	.newsletter-box {
+		border-radius: var(--radius);
+		padding: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 48px;
+		background: linear-gradient(135deg, rgba(0,212,255,0.06) 0%, rgba(123,97,255,0.06) 100%);
+	}
+
+	.newsletter-text h2 {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 24px;
+		font-weight: 700;
+		margin-bottom: 8px;
+	}
+
+	.newsletter-text p {
+		font-size: 14px;
+		color: var(--color-text-muted);
+	}
+
+	.newsletter-form {
+		display: flex;
+		gap: 12px;
+		min-width: 380px;
+	}
+
+	.newsletter-form input {
+		flex: 1;
+		padding: 14px 20px;
+		background: rgba(255,255,255,0.06);
+		border: 1px solid var(--glass-border);
+		border-radius: var(--radius-sm);
+		font-size: 14px;
+		color: #fff;
+		font-family: inherit;
+		outline: none;
+		transition: border-color 0.2s;
+	}
+
+	.newsletter-form input:focus {
+		border-color: rgba(0,212,255,0.4);
+	}
+
+	.newsletter-form input::placeholder { color: var(--color-text-muted); }
+
+	.newsletter-form button {
+		background: var(--color-accent);
+		color: #000;
+		border: none;
+		padding: 14px 28px;
+		border-radius: var(--radius-sm);
+		font-weight: 700;
+		font-size: 14px;
+		cursor: pointer;
+		font-family: inherit;
+		transition: all 0.2s;
+		white-space: nowrap;
+	}
+
+	.newsletter-form button:hover {
+		background: #00b8e0;
+	}
+
+	/* ========== 响应式 ========== */
+	@media (max-width: 1200px) {
+		.cat-grid { grid-template-columns: repeat(3, 1fr); }
+		.why-grid { grid-template-columns: repeat(2, 1fr); }
+	}
+
+	@media (max-width: 1024px) {
+		.hero-content { grid-template-columns: 1fr; }
+		.hero-text h1 { font-size: 42px; }
+		.series-grid { grid-template-columns: repeat(3, 1fr); }
+		.prod-grid { grid-template-columns: repeat(2, 1fr); }
+		.newsletter-box { flex-direction: column; text-align: center; }
+		.newsletter-form { min-width: 100%; width: 100%; }
+	}
+
+	@media (max-width: 768px) {
+		.hero-text h1 { font-size: 34px; }
+		.hero { padding: 40px 0 40px; }
+		.series-grid { grid-template-columns: 1fr; }
+		.cat-grid { grid-template-columns: repeat(2, 1fr); }
+		.prod-grid { grid-template-columns: 1fr; }
+		.why-grid { grid-template-columns: 1fr; }
+		.hero-actions { flex-direction: column; }
+		.section-header { flex-direction: column; gap: 8px; align-items: flex-start; }
+	}
+</style>

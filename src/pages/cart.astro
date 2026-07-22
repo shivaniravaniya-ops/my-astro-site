@@ -1,0 +1,289 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<section class="page-header">
+		<div class="container">
+			<h1>Shopping Cart</h1>
+			<p>Review your items and proceed to checkout</p>
+		</div>
+	</section>
+
+	<section class="cart-section">
+		<div class="container">
+			<div class="cart-layout">
+				<div class="cart-items-wrapper" id="cartItemsWrapper">
+					<div class="cart-empty" id="cartEmpty">
+						<div class="empty-icon">🛒</div>
+						<h3>Your cart is empty</h3>
+						<p>Looks like you haven't added any parts yet.</p>
+						<a href="/shop" class="btn-shop">Start Shopping</a>
+					</div>
+					<div class="cart-items" id="cartItems"></div>
+				</div>
+
+				<aside class="order-summary" id="orderSummary" style="display:none;">
+					<div class="summary-card glass-card">
+						<h3>Order Summary</h3>
+						<div class="summary-row">
+							<span>Subtotal</span>
+							<span id="summarySubtotal">$0</span>
+						</div>
+						<div class="summary-row">
+							<span>Shipping</span>
+							<span id="summaryShipping">Calculated at checkout</span>
+						</div>
+						<div class="summary-divider"></div>
+						<div class="summary-total">
+							<span>Total</span>
+							<span id="summaryTotal">$0</span>
+						</div>
+						<button class="btn-checkout" id="checkoutBtn">Proceed to Checkout</button>
+						<div class="summary-note">Shipping calculated based on location</div>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<script>
+	const CART_KEY = 'tankgarage_cart';
+
+	function getCart() {
+		try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch { return []; }
+	}
+
+	function saveCart(cart) {
+		localStorage.setItem(CART_KEY, JSON.stringify(cart));
+		window.dispatchEvent(new CustomEvent('cart-updated', { detail: { count: cart.reduce((s: number, i: any) => s + i.quantity, 0) } }));
+		renderCart();
+		updateSummary();
+	}
+
+	function renderCart() {
+		const cart = getCart();
+		const container = document.getElementById('cartItems');
+		const empty = document.getElementById('cartEmpty');
+		const summary = document.getElementById('orderSummary');
+		if (!container) return;
+
+		if (cart.length === 0) {
+			container.innerHTML = '';
+			empty.style.display = 'block';
+			summary.style.display = 'none';
+			return;
+		}
+
+		empty.style.display = 'none';
+		summary.style.display = 'block';
+		container.innerHTML = cart.map((item: any) => `
+			<div class="cart-item" data-id="${item.id}">
+				<div class="item-img-placeholder">Image</div>
+				<div class="item-info">
+					<h4>${item.name}</h4>
+					<p class="item-price">$${item.price.toLocaleString()} / unit</p>
+				</div>
+				<div class="item-qty">
+					<button class="qty-btn" onclick="changeQty('${item.id}', -1)">−</button>
+					<span>${item.quantity}</span>
+					<button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+				</div>
+				<div class="item-subtotal">$${(item.price * item.quantity).toLocaleString()}</div>
+				<button class="btn-remove" onclick="removeItem('${item.id}')">🗑️</button>
+			</div>
+		`).join('');
+	}
+
+	function changeQty(id: string, delta: number) {
+		const cart = getCart();
+		const item = cart.find((i: any) => i.id === id);
+		if (item) {
+			item.quantity = Math.max(1, Math.min(99, item.quantity + delta));
+			saveCart(cart);
+		}
+	}
+
+	function removeItem(id: string) {
+		saveCart(getCart().filter((i: any) => i.id !== id));
+	}
+
+	function updateSummary() {
+		const cart = getCart();
+		const subtotal = cart.reduce((s: number, i: any) => s + i.price * i.quantity, 0);
+		document.getElementById('summarySubtotal').textContent = '$' + subtotal.toLocaleString();
+		document.getElementById('summaryTotal').textContent = '$' + subtotal.toLocaleString();
+	}
+
+	renderCart();
+	updateSummary();
+
+	document.getElementById('checkoutBtn')?.addEventListener('click', () => {
+		alert('Checkout coming soon! Contact us at info@tankgarage.com.au to place your order.');
+	});
+</script>
+
+<style>
+	.page-header {
+		padding: 60px 0 40px;
+		text-align: center;
+	}
+	.page-header h1 {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 42px;
+		font-weight: 800;
+		margin-bottom: 12px;
+	}
+	.page-header p { font-size: 16px; color: var(--color-text-muted); }
+
+	.cart-section { padding: 40px 0 80px; }
+
+	.cart-layout {
+		display: grid;
+		grid-template-columns: 1fr 380px;
+		gap: 32px;
+		align-items: start;
+	}
+
+	.cart-items-wrapper {
+		background: var(--glass-bg);
+		backdrop-filter: blur(20px);
+		border: 1px solid var(--glass-border);
+		border-radius: var(--radius);
+		overflow: hidden;
+	}
+
+	.cart-empty {
+		display: none;
+		text-align: center;
+		padding: 80px 24px;
+	}
+	.cart-empty.show { display: block; }
+	.empty-icon { font-size: 64px; margin-bottom: 16px; }
+	.cart-empty h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+	.cart-empty p { font-size: 14px; color: var(--color-text-muted); margin-bottom: 24px; }
+	.btn-shop {
+		display: inline-block;
+		background: var(--color-accent);
+		color: #000;
+		padding: 12px 28px;
+		border-radius: var(--radius-sm);
+		font-weight: 700;
+		font-size: 14px;
+		transition: all 0.2s;
+	}
+	.btn-shop:hover { background: #00b8e0; }
+
+	.cart-items { padding: 0; }
+
+	.cart-item {
+		display: grid;
+		grid-template-columns: 80px 1fr auto auto auto;
+		gap: 20px;
+		align-items: center;
+		padding: 20px 24px;
+		border-bottom: 1px solid var(--glass-border);
+	}
+	.cart-item:last-child { border-bottom: none; }
+
+	.item-img-placeholder {
+		width: 80px;
+		height: 60px;
+		background: rgba(255,255,255,0.04);
+		border: 1px dashed rgba(255,255,255,0.1);
+		border-radius: 8px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 10px;
+		color: rgba(255,255,255,0.2);
+	}
+
+	.item-info h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+	.item-price { font-size: 13px; color: var(--color-text-muted); }
+
+	.item-qty {
+		display: flex;
+		align-items: center;
+		gap: 0;
+		border: 1px solid var(--glass-border);
+		border-radius: 6px;
+		overflow: hidden;
+	}
+	.qty-btn {
+		width: 32px;
+		height: 34px;
+		background: transparent;
+		border: none;
+		color: var(--color-text);
+		font-size: 16px;
+		cursor: pointer;
+		font-family: inherit;
+		transition: background 0.2s;
+	}
+	.qty-btn:hover { background: rgba(255,255,255,0.05); }
+	.item-qty span {
+		min-width: 40px;
+		text-align: center;
+		font-size: 14px;
+		font-weight: 600;
+		border-left: 1px solid var(--glass-border);
+		border-right: 1px solid var(--glass-border);
+		padding: 0 8px;
+		line-height: 34px;
+	}
+
+	.item-subtotal { font-size: 16px; font-weight: 700; min-width: 80px; text-align: right; }
+	.btn-remove { background: none; border: none; font-size: 16px; cursor: pointer; opacity: 0.5; }
+	.btn-remove:hover { opacity: 1; }
+
+	/* Summary */
+	.summary-card {
+		padding: 28px;
+		position: sticky;
+		top: 90px;
+	}
+	.summary-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+	.summary-row {
+		display: flex;
+		justify-content: space-between;
+		font-size: 14px;
+		color: var(--color-text-muted);
+		margin-bottom: 12px;
+	}
+	.summary-divider { height: 1px; background: var(--glass-border); margin: 16px 0; }
+	.summary-total {
+		display: flex;
+		justify-content: space-between;
+		font-size: 18px;
+		font-weight: 700;
+		margin-bottom: 20px;
+	}
+	.summary-total span:last-child { color: var(--color-accent); }
+	.btn-checkout {
+		width: 100%;
+		padding: 14px;
+		background: var(--color-accent);
+		color: #000;
+		border: none;
+		border-radius: var(--radius-sm);
+		font-size: 14px;
+		font-weight: 700;
+		text-transform: uppercase;
+		cursor: pointer;
+		font-family: inherit;
+		transition: all 0.2s;
+		margin-bottom: 12px;
+	}
+	.btn-checkout:hover { background: #00b8e0; }
+	.summary-note { font-size: 12px; color: var(--color-text-muted); text-align: center; }
+
+	@media (max-width: 1024px) {
+		.cart-layout { grid-template-columns: 1fr; }
+	}
+	@media (max-width: 768px) {
+		.cart-item { grid-template-columns: 60px 1fr auto; gap: 12px; }
+		.item-qty, .item-subtotal, .btn-remove { grid-column: 2; }
+	}
+</style>
