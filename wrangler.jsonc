@@ -14,8 +14,8 @@
 	"d1_databases": [
 		{
 			"binding": "DB",
-			"database_name": "motorparts-db",
-			"database_id": "local-db"
+			"database_name": "tankgarage-db",
+			"database_id": "YOUR_DATABASE_ID_HERE"
 		}
 	]
 }
